@@ -1,0 +1,12 @@
+**
+!package.json
+!package-lock.json
+!tsconfig.json
+!src/
+!src/**
+!ha-app/
+!ha-app/run.mjs
+!ha-app/aupu-mapping.json
+!ha-app/runtime/
+!ha-app/runtime/package.json
+!ha-app/runtime/package-lock.json

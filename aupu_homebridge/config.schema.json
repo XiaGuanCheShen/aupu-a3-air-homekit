@@ -1,0 +1,41 @@
+{
+  "pluginAlias": "AupuA3Air",
+  "pluginType": "platform",
+  "singular": true,
+  "headerDisplay": "一个多服务浴霸。可选模拟或 HA 后端；实体和属性通过配置映射，凭据使用环境变量或受限 Token 文件。",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "name": {"title": "浴霸名称", "type": "string", "default": "奥普 A3-Air", "required": true, "maxLength": 64},
+      "deviceId": {"title": "稳定设备 ID（配对后不要修改）", "type": "string", "default": "aupu-a3-air-virtual-1", "required": true},
+      "backend": {"title": "后端", "type": "string", "enum": ["simulation", "ha"], "default": "simulation"},
+      "ha": {
+        "title": "HA 后端映射（参照 ha-app/aupu-mapping.json）",
+        "type": "object",
+        "properties": {
+          "url": {"type": "string"},
+          "tokenFile": {"type": "string"},
+          "tokenEnv": {"type": "string"},
+          "informationEntity": {"type": "string"},
+          "controlEntity": {"type": "string"},
+          "readOnly": {"type": "boolean", "default": true},
+          "staleSeconds": {"type": "number", "default": 90},
+          "fields": {"type": "object", "additionalProperties": true},
+          "modes": {"type": "object", "additionalProperties": true},
+          "modeAliases": {"type": "object", "additionalProperties": true},
+          "temperature": {"type": "object", "additionalProperties": true}
+        }
+      },
+      "primaryService": {"title": "主服务（不能保证改变苹果布局）", "type": "string", "enum": ["heater", "fan", "light"], "default": "heater"},
+      "includeTemperatureSensor": {"title": "额外温度传感器服务（取暖服务始终有当前温度）", "type": "boolean", "default": true},
+      "simulation": {
+        "type": "object",
+        "properties": {
+          "ambientTemperature": {"type": "number", "default": 24, "minimum": 0, "maximum": 50},
+          "targetTemperature": {"type": "number", "default": 28, "minimum": 16, "maximum": 40, "multipleOf": 0.5},
+          "tickSeconds": {"type": "number", "default": 5, "minimum": 1, "maximum": 60}
+        }
+      }
+    }
+  }
+}

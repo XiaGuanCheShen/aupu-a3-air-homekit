@@ -1,0 +1,44 @@
+name: Verify
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [ubuntu-24.04, ubuntu-24.04-arm]
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: aupu_homebridge
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.22.2'
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: npm test
+      - name: Build and start the Home Assistant app
+        run: |
+          docker build --tag aupu-smoke .
+          storage=$(mktemp -d)
+          printf '%s\n' '{"backend":"simulation"}' > "$storage/options.json"
+          docker run --detach --name aupu-smoke --publish 127.0.0.1::51863 --volume "$storage:/data" aupu-smoke
+          trap 'docker rm -f aupu-smoke >/dev/null' EXIT
+          address=$(docker port aupu-smoke 51863/tcp)
+          for attempt in {1..30}; do
+            status=$(curl --silent --max-time 1 --output /dev/null --write-out '%{http_code}' "http://$address/accessories" || true)
+            if [ "$status" = 470 ]; then break; fi
+            sleep 1
+          done
+          test "$status" = 470
+          docker logs aupu-smoke > "$storage/startup.log" 2>&1
+          grep -q '8 个功能服务' "$storage/startup.log"
+          test -s "$storage/config.json"

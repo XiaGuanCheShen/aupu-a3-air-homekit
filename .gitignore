@@ -1,0 +1,10 @@
+node_modules/
+dist/
+/aupu_homebridge/docs/smoke-result.json
+.homebridge-demo/
+.env
+.env.*
+*.log
+*.tgz
+*.zip
+*.tar

@@ -1,0 +1,33 @@
+name: "奥普 A3-Air · Homebridge"
+version: "0.3.2"
+slug: "aupu_homebridge"
+description: "通过 Xiaomi Miot 把奥普 A3-Air 浴霸接入苹果家庭。"
+url: "https://github.com/XiaGuanCheShen/aupu-a3-air-homekit"
+arch:
+  - amd64
+  - aarch64
+startup: services
+boot: auto
+init: true
+host_network: true
+homeassistant_api: true
+stage: experimental
+timeout: 30
+options:
+  backend: ha
+  allow_control: false
+  information_entity: ""
+  control_entity: ""
+  name: "奥普 A3-Air"
+  primary_service: heater
+  include_temperature_sensor: true
+  bridge_port: 51863
+schema:
+  backend: list(simulation|ha)
+  allow_control: bool
+  information_entity: str
+  control_entity: str
+  name: str
+  primary_service: list(heater|fan|light)
+  include_temperature_sensor: bool
+  bridge_port: int(1024,65535)

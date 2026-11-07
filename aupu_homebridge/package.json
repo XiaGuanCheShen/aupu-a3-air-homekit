@@ -1,0 +1,48 @@
+{
+  "name": "homebridge-aupu-a3-air",
+  "version": "0.3.2",
+  "private": true,
+  "description": "A single multi-service Aupu A3-Air HAP accessory with local Home Assistant and simulation backends.",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "keywords": [
+    "homebridge-plugin",
+    "supports-hap"
+  ],
+  "license": "MIT",
+  "files": [
+    "dist",
+    "config.schema.json",
+    "examples",
+    "ha-app/aupu-mapping.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": "^22.12.0 || ^24.0.0 || ^26.0.0",
+    "homebridge": "^2.5.0"
+  },
+  "peerDependencies": {
+    "homebridge": "^2.5.0"
+  },
+  "devDependencies": {
+    "@homebridge/hap-nodejs": "2.3.0",
+    "@types/node": "^22.0.0",
+    "homebridge": "2.5.0",
+    "typescript": "6.0.3",
+    "ws": "^8.22.1"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "npm run build && node --test test/*.test.mjs",
+    "demo": "node scripts/demo.mjs",
+    "smoke": "node scripts/smoke.mjs",
+    "prepack": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/XiaGuanCheShen/aupu-a3-air-homekit.git",
+    "directory": "aupu_homebridge"
+  }
+}

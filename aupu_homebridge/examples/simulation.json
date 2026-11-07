@@ -1,0 +1,20 @@
+{
+  "bridge": {
+    "name": "Aupu Virtual Lab",
+    "username": "0E:A3:A1:27:36:01",
+    "port": 51863,
+    "pin": "318-45-762",
+    "advertiser": "ciao"
+  },
+  "plugins": ["homebridge-aupu-a3-air"],
+  "accessories": [],
+  "platforms": [{
+    "platform": "AupuA3Air",
+    "name": "奥普 A3-Air",
+    "deviceId": "aupu-a3-air-virtual-1",
+    "backend": "simulation",
+    "primaryService": "heater",
+    "includeTemperatureSensor": true,
+    "simulation": {"ambientTemperature": 24, "targetTemperature": 28, "tickSeconds": 5}
+  }]
+}

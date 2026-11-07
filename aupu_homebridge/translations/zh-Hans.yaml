@@ -1,0 +1,25 @@
+configuration:
+  backend:
+    name: 数据来源
+    description: ha 连接真实浴霸，simulation 用于体验虚拟配件。
+  information_entity:
+    name: 浴霸信息实体
+    description: 填写 Xiaomi Miot 中同一浴霸的 button 实体 ID。
+  control_entity:
+    name: 浴霸取暖实体
+    description: 填写同一浴霸的 climate 实体 ID。
+  allow_control:
+    name: 允许控制
+    description: 确认真实状态同步后开启。保存后重启本应用。
+  name:
+    name: 家庭中的配件名称
+    description: 默认显示为奥普 A3-Air。
+  primary_service:
+    name: 主功能
+    description: heater 为取暖，fan 为换气，light 为主照明。
+  include_temperature_sensor:
+    name: 单独显示环境温度传感器
+    description: 取暖控件也会显示当前环境温度。
+  bridge_port:
+    name: HomeKit 桥接端口
+    description: 仅在发生端口冲突时修改。默认 51863。

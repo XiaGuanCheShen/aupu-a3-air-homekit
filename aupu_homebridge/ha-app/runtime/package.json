@@ -1,0 +1,7 @@
+{
+  "name": "aupu-homebridge-ha-runtime",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {"homebridge": "2.5.0"}
+}

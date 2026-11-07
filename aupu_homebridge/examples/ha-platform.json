@@ -1,0 +1,30 @@
+{
+  "platform": "AupuA3Air",
+  "backend": "ha",
+  "name": "奥普 A3-Air",
+  "deviceId": "aupu-a3-air-virtual-1",
+  "primaryService": "heater",
+  "includeTemperatureSensor": true,
+  "ha": {
+    "url": "http://YOUR_HA:8123",
+    "tokenFile": "/absolute/private/ha-token",
+    "informationEntity": "button.replace_me",
+    "controlEntity": "climate.replace_me",
+    "fields": {
+      "mainLight": {"attribute": "light.on", "siid": 2, "piid": 1},
+      "nightLight": {"attribute": "extend.night_light", "siid": 6, "piid": 4},
+      "mode": {"attribute": "ptc_bath_heater.mode", "siid": 3, "piid": 2},
+      "targetTemperature": {"attribute": "target_temperature-3-3", "siid": 3, "piid": 3},
+      "currentTemperature": {"attribute": "environment.temperature", "siid": 4, "piid": 1},
+      "fanSpeed": {"attribute": "extend.ventilate_gear", "siid": 6, "piid": 5},
+      "blowerSpeed": {"attribute": "fan_control.fan_level", "siid": 5, "piid": 2},
+      "cooldownSeconds": {"attribute": "extend.count_down", "siid": 6, "piid": 2},
+      "fault": {"attribute": "ptc_bath_heater.fault", "siid": 3, "piid": 1}
+    },
+    "modes": {"off": 0, "heat": 18, "vent": 7, "blow": 2, "dry": 4, "deodorize": 21},
+    "modeAliases": {"23": "deodorize"},
+    "temperature": {"min": 30, "max": 42, "step": 1},
+    "staleSeconds": 90,
+    "readOnly": true
+  }
+}
